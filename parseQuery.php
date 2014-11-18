@@ -25,9 +25,16 @@ class parseQuery extends parseRestClient{
 
 	public function find(){
 		if(empty($this->_query)){
+			$urlParams = array();
+
+			if(!empty($this->_limit) || $this->_limit == 0){
+				$urlParams['limit'] = $this->_limit;
+			}
+
 			$request = $this->request(array(
 				'method' => 'GET',
-				'requestUrl' => $this->_requestUrl
+				'requestUrl' => $this->_requestUrl,
+				'urlParams' => $urlParams
 			));
 
 			return $request;
